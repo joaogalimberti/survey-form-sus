@@ -1,72 +1,409 @@
 <!DOCTYPE html>
-<html lang="en">
-
-  <head>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8">
-    <title>SURVEY FORM</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body>
-    <h1 id="title">SURVEY FORM</h1>
-    <p id="description">Thank you for helping me to improve</p>
-    <form method="post" id="survey-form" action='https://servey-form.com.br'>
-
-    <fieldset>
-      <label id="name-label">Name: 
-        <input id="name" placeholder="Full Name" type="text" required/>
-      </label>
-
-      <label id="email-label">Email: 
-        <input id="email" placeholder="example@mail.com" type="email" required/>
-      </label>
-
-      <label id="number-label">Age: 
-        <input id="number" placeholder="12+" type="number" min="12" max="120" required/>
-      </label>
-
-      <label >Which option best describes your current role?
-        <select id="dropdown">
-          <option value="">Select current role</option>
-          <option value="1">Student</option>
-          <option value="2">Part time job</option>
-          <option value="3">Full time job</option>
-          <option value="4">Full time learner</option>
-          <option value="5">Prefer not to say</option>
-          <option value="6">Other</option>
-        </select>
-      </label>
-
-      <label>Do you have an interest in any programming/ development area?</label> 
-      
-      <label>
-        <input id="definit" type="radio" class="inline" name="radio-group" value="7"/>
-         Definitely</label>
-      
-      <label>
-        <input id="personal-account" type="radio" name="radio-group" class="inline" value="8"/> 
-      Maybe</label>
-
-      <label for="personal-account">
-        <input id="personal-account" type="radio" name="radio-group" class="inline" value="9"/> 
-      Not sure</label>
-
-      <label>If you were to choose a specific area to start in, what would it be?
-        <select id="dropdown">
-          <option value="">Select an option</option>
-          <option value="10">Back End</option>
-          <option value="11">Front End</option>
-          <option value="12">Full Stack</option>
-          <option value="13">Other</option>
-        </select>
-      </label>
-
-      <label>Any comments or suggestions? 
-        <textarea type="textarea"  rows="3" cols="30" placeholder="Enter your suggestion here..."></textarea>
-      </label>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pesquisa de Satisfação - SUS - Sua opinião nos ajuda a cuidar melhor de você">
+    <title>Sua Opinião Importa - Pesquisa SUS</title>
     
-      <input type="submit" id="submit" value="Submit"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Logo SUS" class="logo">
+                </div>
+                <div class="header-text">
+                    <h1>Conta pra gente como foi seu atendimento!</h1>
+                    <p>Queremos ouvir você para melhorar cada vez mais ❤️</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    </fieldset>
-  </body>
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Intro Message -->
+        <div class="intro-message">
+            <h2>Olá! Que bom ter você aqui 😊</h2>
+            <p>Sabemos que seu tempo é precioso, e por isso agradecemos muito por estar aqui. Sua opinião <strong>realmente faz diferença</strong> para que possamos cuidar melhor de você e de toda comunidade.</p>
+            <p>Este formulário levará apenas alguns minutinhos, e cada resposta nos ajuda a entender onde estamos acertando e onde podemos melhorar.</p>
+            <p><strong>Obrigado por nos ajudar a ser melhor para você!</strong></p>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-section">
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p class="progress-text">Você está na etapa <span id="currentStep">1</span> de 4</p>
+        </div>
+
+        <!-- Form -->
+        <div class="form-card">
+            <form id="surveyForm">
+                
+                <!-- Seção 1: Seus Dados -->
+                <div class="form-section active" data-section="1">
+                    <div class="section-title">
+                        <span class="section-number">1</span>
+                        <h2>Vamos começar com seus dados</h2>
+                    </div>
+
+                    <p class="rating-description" style="margin-bottom: 1.5rem;">Essas informações nos ajudam a entender melhor quem você é e como podemos atendê-lo(a) melhor.</p>
+
+                    <div class="form-group">
+                        <label for="nome" class="required">Qual é o seu nome?</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cpf" class="required">Seu CPF</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefone" class="required">Telefone para contato</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" maxlength="15" required>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail (opcional)</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com">
+                        <p class="helper-text">Se quiser receber atualizações sobre melhorias</p>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="unidade" class="required">Onde você foi atendido(a)?</label>
+                            <select id="unidade" name="unidade" required>
+                                <option value="">Escolha a unidade</option>
+                                <option value="ubs-centro">UBS Centro</option>
+                                <option value="ubs-norte">UBS Zona Norte</option>
+                                <option value="ubs-sul">UBS Zona Sul</option>
+                                <option value="ubs-leste">UBS Zona Leste</option>
+                                <option value="ubs-oeste">UBS Zona Oeste</option>
+                                <option value="hospital">Hospital Municipal</option>
+                                <option value="pronto-socorro">Pronto Socorro</option>
+                                <option value="caps">CAPS</option>
+                                <option value="outro">Outro local</option>
+                            </select>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="data" class="required">Quando foi o atendimento?</label>
+                            <input type="date" id="data" name="data" required>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <span></span>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                            Continuar →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seção 2: Tempo de Espera e Atendimento -->
+                <div class="form-section" data-section="2">
+                    <div class="section-title">
+                        <span class="section-number">2</span>
+                        <h2>Como foi o tempo de espera e o atendimento?</h2>
+                    </div>
+
+                    <p class="rating-description" style="margin-bottom: 1.5rem;">Queremos saber como você se sentiu durante o atendimento.</p>
+
+                    <div class="rating-question">
+                        <label class="required">Quanto tempo você esperou para ser atendido(a)?</label>
+                        <p class="rating-description">Seja sincero(a), isso nos ajuda muito!</p>
+                        <div class="radio-cards">
+                            <label class="radio-card">
+                                <input type="radio" name="tempo-espera" value="rapido" required>
+                                <div class="card-content">
+                                    <div class="card-icon">⚡</div>
+                                    <div class="card-label">Foi bem rápido<br>(até 30 min)</div>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="tempo-espera" value="aceitavel">
+                                <div class="card-content">
+                                    <div class="card-icon">⏱️</div>
+                                    <div class="card-label">Demorou um pouco<br>(30 min - 1h)</div>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="tempo-espera" value="demorado">
+                                <div class="card-content">
+                                    <div class="card-icon">⏰</div>
+                                    <div class="card-label">Demorou bastante<br>(1h - 2h)</div>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="tempo-espera" value="muito-demorado">
+                                <div class="card-content">
+                                    <div class="card-icon">⌛</div>
+                                    <div class="card-label">Demorou demais<br>(mais de 2h)</div>
+                                </div>
+                            </label>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="rating-question">
+                        <label class="required">Como você avalia o atendimento que recebeu?</label>
+                        <p class="rating-description">Quanto mais estrelas, melhor foi sua experiência</p>
+                        <div class="star-rating" data-rating="qualidade">
+                            <input type="hidden" name="qualidade" required>
+                            <button type="button" class="star" data-value="1">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="star" data-value="2">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="star" data-value="3">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="star" data-value="4">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="star" data-value="5">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="rating-question">
+                        <label class="required">A equipe foi atenciosa e profissional com você?</label>
+                        <p class="rating-description">Como você se sentiu durante o atendimento?</p>
+                        <div class="emoji-rating" data-rating="atencao">
+                            <input type="hidden" name="atencao" required>
+                            <button type="button" class="emoji-btn" data-value="1" title="Muito insatisfeito">😞</button>
+                            <button type="button" class="emoji-btn" data-value="2" title="Insatisfeito">😕</button>
+                            <button type="button" class="emoji-btn" data-value="3" title="Neutro">😐</button>
+                            <button type="button" class="emoji-btn" data-value="4" title="Satisfeito">😊</button>
+                            <button type="button" class="emoji-btn" data-value="5" title="Muito satisfeito">😄</button>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(1)">
+                            ← Voltar
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+                            Continuar →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seção 3: Estrutura e Limpeza -->
+                <div class="form-section" data-section="3">
+                    <div class="section-title">
+                        <span class="section-number">3</span>
+                        <h2>E quanto ao local?</h2>
+                    </div>
+
+                    <p class="rating-description" style="margin-bottom: 1.5rem;">Nos ajude a entender como estava o ambiente.</p>
+
+                    <div class="rating-question">
+                        <label class="required">Como estava a limpeza e higiene do local?</label>
+                        <p class="rating-description">De 1 (muito sujo) a 10 (muito limpo)</p>
+                        <div class="scale-rating" data-rating="limpeza">
+                            <input type="hidden" name="limpeza" required>
+                            <button type="button" class="scale-btn" data-value="1">1</button>
+                            <button type="button" class="scale-btn" data-value="2">2</button>
+                            <button type="button" class="scale-btn" data-value="3">3</button>
+                            <button type="button" class="scale-btn" data-value="4">4</button>
+                            <button type="button" class="scale-btn" data-value="5">5</button>
+                            <button type="button" class="scale-btn" data-value="6">6</button>
+                            <button type="button" class="scale-btn" data-value="7">7</button>
+                            <button type="button" class="scale-btn" data-value="8">8</button>
+                            <button type="button" class="scale-btn" data-value="9">9</button>
+                            <button type="button" class="scale-btn" data-value="10">10</button>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Muito sujo</span>
+                            <span>Muito limpo</span>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="rating-question">
+                        <label class="required">O local era confortável?</label>
+                        <p class="rating-description">Cadeiras, temperatura, iluminação...</p>
+                        <div class="scale-rating" data-rating="conforto">
+                            <input type="hidden" name="conforto" required>
+                            <button type="button" class="scale-btn" data-value="1">1</button>
+                            <button type="button" class="scale-btn" data-value="2">2</button>
+                            <button type="button" class="scale-btn" data-value="3">3</button>
+                            <button type="button" class="scale-btn" data-value="4">4</button>
+                            <button type="button" class="scale-btn" data-value="5">5</button>
+                            <button type="button" class="scale-btn" data-value="6">6</button>
+                            <button type="button" class="scale-btn" data-value="7">7</button>
+                            <button type="button" class="scale-btn" data-value="8">8</button>
+                            <button type="button" class="scale-btn" data-value="9">9</button>
+                            <button type="button" class="scale-btn" data-value="10">10</button>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Nada confortável</span>
+                            <span>Muito confortável</span>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>O que estava disponível quando você foi atendido(a)?</label>
+                        <p class="rating-description" style="margin-bottom: 1rem;">Pode marcar mais de uma opção</p>
+                        <div class="checkbox-cards">
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="recursos" value="medicamentos">
+                                <div class="checkbox-content">💊 Medicamentos</div>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="recursos" value="equipamentos">
+                                <div class="checkbox-content">🏥 Equipamentos</div>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="recursos" value="exames">
+                                <div class="checkbox-content">🔬 Exames</div>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="recursos" value="acessibilidade">
+                                <div class="checkbox-content">♿ Acessibilidade</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(2)">
+                            ← Voltar
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+                            Continuar →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Seção 4: Comentários Finais -->
+                <div class="form-section" data-section="4">
+                    <div class="section-title">
+                        <span class="section-number">4</span>
+                        <h2>Última etapa! Queremos ouvir mais de você</h2>
+                    </div>
+
+                    <p class="rating-description" style="margin-bottom: 1.5rem;">Sua opinião completa nos ajuda muito a melhorar.</p>
+
+                    <div class="form-group">
+                        <label for="comentarios">Quer contar mais alguma coisa pra gente?</label>
+                        <p class="rating-description">Pode ser um elogio, uma crítica, uma sugestão... O que você sentir vontade de compartilhar!</p>
+                        <textarea id="comentarios" name="comentarios" rows="5" placeholder="Escreva aqui o que quiser nos dizer..."></textarea>
+                        <p class="char-counter"><span id="charCount">0</span> / 1000 caracteres</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Você indicaria esta unidade para um amigo ou familiar?</label>
+                        <div class="recommendation-options">
+                            <label class="recommendation-btn">
+                                <input type="radio" name="recomendaria" value="sim" required>
+                                <div class="recommendation-content">👍 Sim, indicaria</div>
+                            </label>
+                            <label class="recommendation-btn">
+                                <input type="radio" name="recomendaria" value="talvez">
+                                <div class="recommendation-content">🤔 Talvez</div>
+                            </label>
+                            <label class="recommendation-btn">
+                                <input type="radio" name="recomendaria" value="nao">
+                                <div class="recommendation-content">👎 Não indicaria</div>
+                            </label>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="terms-box">
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="termos" name="termos" required>
+                            <label for="termos">
+                                Eu entendo e autorizo que minhas respostas sejam usadas para melhorar os serviços de saúde, conforme a Lei Geral de Proteção de Dados (LGPD). Seus dados são confidenciais e seguros conosco! 🔒
+                            </label>
+                        </div>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(3)">
+                            ← Voltar
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            ✓ Enviar Pesquisa
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Success Card -->
+        <div class="success-card" id="successCard">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h2>Muito obrigado! 🎉</h2>
+            <p>Sua opinião foi recebida com muito carinho e já está sendo analisada pela nossa equipe. Cada resposta como a sua nos ajuda a melhorar o atendimento para toda comunidade.</p>
+            <p><strong>Você faz a diferença!</strong> ❤️</p>
+            <div class="protocol-box">
+                <p><strong>Número de protocolo:</strong> <span id="protocolNumber"></span></p>
+                <p><strong>Data e hora:</strong> <span id="submitDate"></span></p>
+            </div>
+            <button class="btn btn-primary" onclick="window.location.reload()">
+                Fazer nova pesquisa
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>SUS - Sistema Único de Saúde</strong></p>
+            <p>Saúde é um direito de todos e dever do Estado</p>
+            <div class="footer-links">
+                <span>📞 Disque Saúde: 136</span>
+                <span>📞 Ouvidoria SUS: 0800 061 0136</span>
+            </div>
+            <p style="margin-top: 1rem; opacity: 0.7;">&copy; 2025 Ministério da Saúde - Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
 </html>
